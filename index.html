@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>외계인들 (ALIENS) - Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Orbitron:wght@700&family=Noto+Sans+KR:wght@300;500;900&display=swap" rel="stylesheet">
+<style>
+    :root {
+        --bg-color: #0a051b;
+        --card-bg: rgba(20, 15, 45, 0.7);
+        --neon-purple: #bd00ff;
+        --neon-cyan: #00f0ff;
+        --text-color: #e0def4;
+    }
+
+    body { 
+        font-family: 'Noto Sans KR', sans-serif; 
+        background-color: var(--bg-color); 
+        color: var(--text-color); 
+        margin: 0; 
+        padding: 0; 
+        overflow-x: hidden;
+        /* 우주 별빛 배경 효과 */
+        background-image: 
+            radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 40px),
+            radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 30px);
+        background-size: 550px 550px, 350px 350px;
+        background-position: 0 0, 40px 60px;
+    }
+
+    /* Navigation / Header */
+    header { 
+        padding: 1.5rem 4rem; 
+        box-sizing: border-box; 
+        display: flex; 
+        justify-content: space-between; 
+        align-items: center; 
+        border-bottom: 1px solid rgba(0, 240, 255, 0.2);
+        box-shadow: 0 0 20px rgba(189, 0, 255, 0.1);
+    }
+    .logo-container {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        cursor: pointer;
+    }
+    .logo-main {
+        font-family: 'Alex Brush', cursive;
+        font-size: 3.5rem;
+        color: #fff;
+        text-shadow: 0 0 10px var(--neon-cyan), 0 0 20px var(--neon-purple);
+        line-height: 0.8;
+        margin: 0;
+    }
+    .logo-sub {
+        font-weight: 900;
+        font-size: 0.9rem;
+        letter-spacing: 6px;
+        color: var(--neon-cyan);
+        margin-top: 5px;
+        padding-left: 5px;
+        text-shadow: 0 0 5px rgba(0, 240, 255, 0.5);
+    }
+    .nav-links { display: flex; gap: 20px; align-items: center; }
+    .nav-link { 
+        color: #ffffff; 
+        text-decoration: none; 
+        font-size: 14px; 
+        font-weight: 600; 
+        letter-spacing: 1px; 
+        cursor: pointer;
+        transition: color 0.3s;
+    }
+    .nav-link:hover { color: var(--neon-cyan); text-shadow: 0 0 8px var(--neon-cyan); }
+
+    /* 암호 입력창 스타일 */
+    .admin-zone { display: flex; gap: 10px; align-items: center; }
+    input, button, select, textarea {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(0, 240, 255, 0.4);
+        color: #fff;
+        padding: 10px 15px;
+        border-radius: 6px;
+        outline: none;
+        font-family: inherit;
+        transition: all 0.3s ease;
+    }
+    input:focus, textarea:focus, select:focus { border-color: var(--neon-cyan); box-shadow: 0 0 10px var(--neon-cyan); background: rgba(20, 15, 45, 0.9); }
+    button {
+        cursor: pointer;
+        background: linear-gradient(45deg, var(--neon-purple), var(--neon-cyan));
+        border: none;
+        font-weight: bold;
+    }
+    button:hover { transform: scale(1.03); box-shadow: 0 0 15px var(--neon-cyan); }
+
+    /* Hero Section */
+    .hero {
+        height: 280px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        position: relative;
+    }
+    .hero h1 {
+        font-family: 'Alex Brush', cursive;
+        font-size: 5.5rem;
+        margin: 0;
+        color: #fff;
+        text-shadow: 0 0 20px var(--neon-purple), 0 0 40px var(--neon-cyan);
+    }
+    .hero p {
+        font-weight: 300;
+        letter-spacing: 5px;
+        text-transform: uppercase;
+        font-size: 13px;
+        margin: 5px 0 0 0;
+        color: var(--neon-cyan);
+        text-shadow: 0 0 5px rgba(0, 240, 255, 0.5);
+    }
+
+    /* Main Container */
+    .container { max-width: 1200px; margin: 0 auto 60px; padding: 0 20px; }
+
+    /* Views */
+    .view { display: none; animation: fadeIn 0.4s ease; }
+    .view.active { display: block; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* Video Grid */
+    .video-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 35px; }
+    .video-card { 
+        background: var(--card-bg); 
+        border-radius: 12px; 
+        overflow: hidden; 
+        cursor: pointer; 
+        transition: all 0.3s ease; 
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        display: flex; flex-direction: column; 
+    }
+    .video-card:hover { transform: translateY(-8px); border-color: var(--neon-cyan); box-shadow: 0 10px 25px rgba(0, 240, 255, 0.25); }
+    .thumbnail-container { width: 100%; height: 190px; background-color: #000; display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative;}
+    .thumbnail { width: 100%; height: 100%; object-fit: cover; }
+    .card-info { padding: 20px; }
+    .card-info h3 { margin: 0 0 8px 0; font-size: 17px; font-weight: 600; color: #fff; }
+    .card-info p { margin: 0; color: #a0a0c0; font-size: 13px; line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+
+    /* Detail View */
+    .detail-wrapper { background: var(--card-bg); padding: 40px; border-radius: 16px; border: 1px solid rgba(189, 0, 255, 0.2); box-shadow: 0 0 30px rgba(189, 0, 255, 0.1); }
+    .detail-video-container { width: 100%; background: #000; aspect-ratio: 16/9; display: flex; justify-content: center; align-items: center; border-radius: 8px; overflow: hidden; margin-bottom: 30px; border: 1px solid rgba(0, 240, 255, 0.2); }
+    .detail-video-container video, .detail-video-container iframe { width: 100%; height: 100%; border: none; }
+    .detail-info { text-align: center; max-width: 800px; margin: 0 auto; }
+    .detail-info h2 { font-size: 26px; color: #fff; margin-bottom: 15px; font-weight: 600; }
+    .detail-info p { color: #a0a0c0; line-height: 1.8; font-size: 14px; white-space: pre-wrap; text-align: left; }
+    
+    .btn-outline { background: transparent; border: 1px solid var(--neon-cyan); color: var(--neon-cyan); padding: 8px 20px; border-radius: 20px;}
+    .btn-outline:hover { background: var(--neon-cyan); color: #000; font-weight: bold; box-shadow: 0 0 15px var(--neon-cyan); }
+    .btn-danger { background: rgba(231, 76, 60, 0.2); border: 1px solid #e74c3c; color: #e74c3c; margin-top: 30px; padding: 10px 25px; border-radius: 20px; font-weight: bold;}
+    .btn-danger:hover { background: #e74c3c; color: white; box-shadow: 0 0 15px #e74c3c; }
+
+    /* Upload Form */
+    .form-container { background-color: var(--card-bg); padding: 45px; border-radius: 16px; border: 1px solid rgba(189, 0, 255, 0.3); max-width: 650px; margin: 0 auto; box-shadow: 0 0 30px rgba(189, 0, 255, 0.15); }
+    .form-container h2 { text-align: center; color: var(--neon-cyan); margin-top: 0; margin-bottom: 35px; font-size: 24px; text-shadow: 0 0 10px var(--neon-cyan); }
+    .form-group { margin-bottom: 22px; display: flex; flex-direction: column; gap: 8px; }
+    .form-group label { font-weight: 600; color: #fff; font-size: 14px; }
+    .file-input-wrapper { border: 2px dashed rgba(0, 240, 255, 0.3); padding: 25px; text-align: center; border-radius: 8px; cursor: pointer; }
+    .submit-btn { width: 100%; padding: 14px; border-radius: 8px; font-size: 15px; font-weight: bold; margin-top: 10px; }
+    
+    footer { text-align: center; padding: 50px 20px; color: #504f6e; font-size: 12px; letter-spacing: 1px; }
+</style>
+</head>
+<body>
+
+<header>
+    <div class="logo-container" onclick="showView('main-view')">
+        <div class="logo-main">Aliens</div>
+        <div class="logo-sub">외계인들</div>
+    </div>
+    <div class="nav-links">
+        <span class="nav-link" onclick="showView('main-view')">주파수 목록 (Archive)</span>
+        <span class="nav-link" onclick="handleUploadNavClick()" id="upload-nav-btn">신호 송신 (Upload)</span>
+        <div class="admin-zone" id="admin-login-zone">
+            <input type="password" id="password-input" placeholder="편집자 암호">
+            <button onclick="checkPassword()" id="auth-btn">인증</button>
+        </div>
+    </div>
+</header>
+
+<div class="hero">
+    <h1>Aliens</h1>
+    <p>Space Video Archive</p>
+</div>
+
+<div class="container">
+    <div id="main-view" class="view active">
+        <div style="text-align: center; margin-bottom: 40px;">
+            <h2 style="color: var(--neon-cyan); font-weight: 500; font-size: 22px; margin-bottom: 10px; text-shadow: 0 0 10px rgba(0,240,255,0.3);">수신된 우주 주파수 목록</h2>
+            <div style="width: 40px; height: 2px; background: var(--neon-purple); margin: 0 auto;"></div>
+        </div>
+        <div class="video-grid" id="video-grid"></div>
+    </div>
+
+    <div id="detail-view" class="view">
+        <div class="detail-wrapper">
+            <button class="btn-outline" style="margin-bottom: 25px; cursor: pointer;" onclick="showView('main-view')">← 기지로 돌아가기</button>
+            <div class="detail-video-container" id="detail-player"></div>
+            <div class="detail-info">
+                <h2 id="detail-title"></h2>
+                <div style="width: 40px; height: 2px; background: var(--neon-purple); margin: 0 auto 25px;"></div>
+                <p id="detail-desc"></p>
+                <button class="btn btn-danger" id="delete-action-btn" onclick="deleteCurrentVideo()" style="display: none;">이 주파수 파괴 (삭제)</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="upload-view" class="view">
+        <div class="form-container">
+            <h2>🛸 새 우주 주파수 등록</h2>
+            <form id="upload-form" onsubmit="handleUpload(event)">
+                <div class="form-group">
+                    <label for="video-title">프로젝트 / 영상 제목</label>
+                    <input type="text" id="video-title" required placeholder="예: 2026 외계 시네마 필름">
+                </div>
+                
+                <div class="form-group">
+                    <label>영상 첨부 방식</label>
+                    <select id="upload-type" onchange="toggleUploadType()">
+                        <option value="url">유튜브 링크 사용</option>
+                        <option value="file">구글 드라이브 등 외부 임베드 코드/링크</option>
+                    </select>
+                </div>
+
+                <div class="form-group" id="url-upload-group">
+                    <label for="video-url">유튜브 링크 주소</label>
+                    <input type="url" id="video-url" placeholder="https://www.youtube.com/watch?v=...">
+                </div>
+
+                <div class="form-group" id="file-upload-group" style="display: none;">
+                    <label for="raw-url">외부 영상 주소 (구글 드라이브 등)</label>
+                    <input type="url" id="raw-url" placeholder="https://drive.google.com/file/d/.../preview">
+                </div>
+
+                <div class="form-group">
+                    <label for="video-desc">영상 설명 및 아카이브 본문</label>
+                    <textarea id="video-desc" required placeholder="연출 의도, 담당 파트 등 우주인들에게 전달할 메시지를 적어주세요."></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary submit-btn">우주로 주파수 쏘기 (등록)</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<footer>
+    &copy; 2026 ALIENS Portfolio. All channels encrypted.
+</footer>
+
+<script>
+    const ADMIN_PASSWORD = "1111";
+    let isEditor = false;
+    let videos = JSON.parse(localStorage.getItem('aliens_portfolio')) || [];
+    let currentVideoId = null;
+
+    function saveVideos() {
+        localStorage.setItem('aliens_portfolio', JSON.stringify(videos));
+    }
+
+    function getYouTubeId(url) {
+        if(!url) return null;
+        const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+        const match = url.match(regExp);
+        return (match && match[2].length === 11) ? match[2] : null;
+    }
+
+    // 외부 링크 임베드 보정 (구글드라이브 등 preview 처리)
+    function parseExternalUrl(url) {
+        if (url.includes('drive.google.com') && url.includes('/file/d/')) {
+            let fileId = url.split('/file/d/')[1].split('/')[0];
+            return `https://drive.google.com/file/d/${fileId}/preview`;
+        }
+        return url;
+    }
+
+    // 비밀번호 체크 로직
+    function checkPassword() {
+        const input = document.getElementById("password-input");
+        const authBtn = document.getElementById("auth-btn");
+
+        if (input.value === ADMIN_PASSWORD) {
+            isEditor = true;
+            alert("👽 편집자 권한이 승인되었습니다.");
+            document.getElementById("admin-login-zone").style.display = "none";
+            document.getElementById("delete-action-btn").style.display = "inline-block";
+            showView('upload-view');
+        } else {
+            alert("교신 실패: 코드가 일치하지 않습니다.");
+            input.value = "";
+        }
+    }
+
+    // 업로드 메뉴 클릭 제어
+    function handleUploadNavClick() {
+        if (isEditor) {
+            showView('upload-view');
+        } else {
+            alert("🔒 신호를 송신하려면 편집자 인증이 필요합니다. 우측 상단에 암호를 입력하세요.");
+            document.getElementById("password-input").focus();
+        }
+    }
+
+    function toggleUploadType() {
+        const type = document.getElementById('upload-type').value;
+        if(type === 'url') {
+            document.getElementById('url-upload-group').style.display = 'block';
+            document.getElementById('file-upload-group').style.display = 'none';
+        } else {
+            document.getElementById('url-upload-group').style.display = 'none';
+            document.getElementById('file-upload-group').style.display = 'block';
+        }
+    }
+
+    function showView(viewId) {
+        document.querySelectorAll('.view').forEach(el => el.classList.remove('active'));
+        document.getElementById(viewId).classList.add('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' }); 
+        if(viewId === 'main-view') renderMain();
+    }
+
+    function renderMain() {
+        const grid = document.getElementById('video-grid');
+        grid.innerHTML = '';
+
+        if(videos.length === 0) {
+            grid.innerHTML = '<p style="color: #6c6985; grid-column: 1 / -1; text-align: center; padding: 80px 0;">우주 공간이 비어있습니다. 첫 번째 주파수를 송신해 보세요!</p>';
+            return;
+        }
+
+        const sortedVideos = [...videos].sort((a, b) => new Date(b.date) - new Date(a.date));
+
+        sortedVideos.forEach(v => {
+            const card = document.createElement('div');
+            card.className = 'video-card';
+            card.onclick = () => openDetail(v.id);
+
+            let mediaContent = '';
+            const ytId = getYouTubeId(v.url);
+            
+            if(ytId) {
+                const thumbUrl = `https://img.youtube.com/vi/${ytId}/maxresdefault.jpg`;
+                mediaContent = `<img class="thumbnail" src="${thumbUrl}" alt="thumbnail" onerror="this.src='https://img.youtube.com/vi/${ytId}/hqdefault.jpg'">`;
+            } else {
+                // 외부 영상/구글 드라이브일 시 보여줄 우주 느낌 템플릿 공간
+                mediaContent = `<div class="thumbnail" style="background: linear-gradient(135deg, #140f2d, #2a1b4e); display:flex; align-items:center; justify-content:center; width:100%; height:100%; color:var(--neon-cyan); font-weight:bold; letter-spacing:1px;">🛸 Cloud Video File</div>`;
+            }
+
+            card.innerHTML = `
+                <div class="thumbnail-container">
+                    ${mediaContent}
+                </div>
+                <div class="card-info">
+                    <h3>${v.title}</h3>
+                    <p>${v.desc}</p>
+                </div>
+            `;
+            grid.appendChild(card);
+        });
+    }
+
+    function openDetail(id) {
+        const video = videos.find(v => v.id === id);
+        if(!video) return;
+
+        currentVideoId = id;
+        document.getElementById('detail-title').innerText = video.title;
+        document.getElementById('detail-desc').innerText = video.desc;
+
+        const playerContainer = document.getElementById('detail-player');
+        const ytId = getYouTubeId(video.url);
+
+        if(ytId) {
+            playerContainer.innerHTML = `<iframe src="https://www.youtube.com/embed/${ytId}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+        } else {
+            playerContainer.innerHTML = `<iframe src="${video.url}" allowfullscreen></iframe>`;
+        }
+
+        // 로그인 상태에 따른 삭제 버튼 노출 여부 제어
+        document.getElementById("delete-action-btn").style.display = isEditor ? "inline-block" : "none";
+
+        showView('detail-view');
+    }
+
+    function handleUpload(e) {
+        e.preventDefault();
+        const title = document.getElementById('video-title').value;
+        const desc = document.getElementById('video-desc').value;
+        const uploadType = document.getElementById('upload-type').value;
+        
+        let finalUrl = '';
+
+        if(uploadType === 'url') {
+            finalUrl = document.getElementById('video-url').value;
+            if(!finalUrl) { return alert('유튜브 주소를 입력해주세요.'); }
+        } else {
+            let rawUrl = document.getElementById('raw-url').value;
+            if(!rawUrl) { return alert('영상 링크 주소를 입력해주세요.'); }
+            finalUrl = parseExternalUrl(rawUrl);
+        }
+
+        const newVideo = {
+            id: Date.now(),
+            title: title,
+            url: finalUrl,
+            desc: desc,
+            date: new Date().toISOString()
+        };
+
+        videos.push(newVideo);
+        saveVideos();
+
+        document.getElementById('upload-form').reset();
+        alert('성공적으로 우주 기지에 등록되었습니다!');
+        showView('main-view');
+    }
+
+    function deleteCurrentVideo() {
+        if(confirm('이 주파수 신호를 우주 공간에서 영구 파괴(삭제)하시겠습니까?')) {
+            videos = videos.filter(v => v.id !== currentVideoId);
+            saveVideos();
+            showView('main-view');
+        }
+    }
+
+    // 초기 실행
+    renderMain();
+</script>
+</body>
+</html>
